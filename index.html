@@ -44,4 +44,49 @@
     .btn {
       margin: 15px 0;
       padding: 10px 20px;
-      background:
+      background: rgba(255,255,255,0.1);
+      border: 1px solid #fff;
+      border-radius: 5px;
+      display: inline-block;
+    }
+
+    .btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+  <script>
+    const options = {
+      timeZone: 'Europe/Oslo',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    };
+    const formatter = new Intl.DateTimeFormat([], options);
+
+    setInterval(() => {
+      document.getElementById("time").textContent = formatter.format(new Date());
+    }, 1000);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const today = new Date().toISOString().split("T")[0];
+      const blogLink = document.getElementById("today-blog-link");
+      blogLink.href = `/blog/${today}.html`;
+      blogLink.textContent = `Read Today’s Blog (${today})`;
+    });
+  </script>
+</head>
+<body>
+
+  <h1><i><b>MY DAILY BLOG</b></i></h1>
+  <div id="timezone">Local Time: <span id="time">--:--</span></div>
+
+  <div>
+    <a id="today-blog-link" class="btn" href="#">Loading Blog...</a>
+    <br>
+    <a href="/random/" class="btn">Random Zone</a>
+    <br>
+    <a href="/all-files/" class="btn">File Archive</a>
+  </div>
+
+</body>
+</html>
