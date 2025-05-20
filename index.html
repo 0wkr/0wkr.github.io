@@ -18,7 +18,7 @@
   </style>
   <script>
     const options = {
-      timeZone: 'Europe/Oslo', // change if needed
+      timeZone: 'Europe/Oslo',
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
@@ -29,7 +29,6 @@
       document.querySelector("#time").innerText = formatter.format(new Date());
     }, 1000);
 
-    // Set today's date dynamically
     document.addEventListener("DOMContentLoaded", () => {
       const today = new Date().toISOString().split("T")[0];
       const blogLink = document.getElementById("today-blog-link");
@@ -58,9 +57,7 @@
     <a href="/faq.html">faq</a> //
     <a href="/blog/">blog archive</a> //
     <a href="/daily/tracker.html">daily tracker</a> //
-    <a href="/loggers/books.html">books</a> //
-    <a href="/loggers/movies.html">movies</a> //
-    <a href="/loggers/series.html">series</a> //
+    <a href="/random/">random</a> //
     <a href="/all-files/">all files</a>
 
   </div>
