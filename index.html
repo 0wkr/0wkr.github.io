@@ -1,65 +1,90 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MY DAILY BLOG</title>
-  <link rel="shortcut icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Daily Blog</title>
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <style>
     body {
       margin: 0;
       padding: 0;
       display: grid;
       place-items: center;
-      height: 100vh;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      color: #333;
       text-align: center;
     }
-    #timezone a { text-decoration: none; }
+    header {
+      width: 100%;
+      position: relative;
+    }
+    #hero {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+    }
+    nav {
+      margin: 20px 0;
+    }
+    nav a,
+    #today-blog-link,
+    #random-link {
+      display: inline-block;
+      margin: 0 10px;
+      padding: 10px 20px;
+      text-decoration: none;
+      border: 2px solid #333;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+    nav a:hover,
+    #today-blog-link:hover,
+    #random-link:hover {
+      background: #333;
+      color: #fff;
+    }
+    #timezone {
+      font-style: italic;
+    }
   </style>
   <script>
-    const options = {
-      timeZone: 'Europe/Oslo',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    };
+    // Time formatter for Oslo
+    const options = { timeZone: 'Europe/Oslo', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     const formatter = new Intl.DateTimeFormat([], options);
+    function updateTime() {
+      document.getElementById('time').textContent = formatter.format(new Date());
+    }
+    setInterval(updateTime, 1000);
 
-    setInterval(() => {
-      document.querySelector("#time").innerText = formatter.format(new Date());
-    }, 1000);
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const today = new Date().toISOString().split("T")[0];
-      const blogLink = document.getElementById("today-blog-link");
+    // Set today's blog link on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const today = new Date().toISOString().split('T')[0];
+      const blogLink = document.getElementById('today-blog-link');
       blogLink.href = `/blog/${today}.html`;
-      blogLink.innerText = `Read today's blog (${today})`;
+      blogLink.textContent = `Read today's blog (${today})`;
     });
   </script>
 </head>
 <body>
-
-  <div>
-    <h1><i><b>MY DAILY BLOG</b></i></h1>
-    <img src="https://i.imgur.com/zy8BRWw.png" style="width:560px;"><br><br>
-
+  <header>
+    <img id="hero" src="https://source.unsplash.com/featured/1200x300?nature,blog" alt="Hero Image">
+  </header>
+  <main>
+    <h1>Welcome to My Daily Blog</h1>
     <div id="timezone">
-      <i>
-        Local Time (Oslo): <span id="time">00:00</span>
-      </i>
+      Local Time (Oslo): <span id="time">--:--:--</span>
     </div>
-
-    <br><br>
-    <a id="today-blog-link" href="#">Loading today’s blog...</a>
-    <br><br>
-
-    <a href="/about.html">about</a> //
-    <a href="/faq.html">faq</a> //
-    <a href="/blog/">blog archive</a> //
-    <a href="/daily/tracker.html">daily tracker</a> //
-    <a href="/random/">random</a> //
-    <a href="/all-files/">all files</a>
-
-  </div>
+    <nav>
+      <a id="today-blog-link" href="#">Loading today's blog...</a>
+      <a href="/about.html">About</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/blog/">Blog Archive</a>
+      <a href="/daily/tracker.html">Daily Tracker</a>
+      <a id="random-link" href="/random/index.html">Random Rants</a>
+      <a href="/all-files/">All Files</a>
+    </nav>
+  </main>
 </body>
 </html>
