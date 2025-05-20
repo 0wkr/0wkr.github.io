@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>MY DAILY BLOG</title>
+  <link rel="shortcut icon" href="/favicon.ico">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    #timezone a { text-decoration: none; }
+  </style>
+  <script>
+    const options = {
+      timeZone: 'Europe/Oslo', // change if needed
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    };
+    const formatter = new Intl.DateTimeFormat([], options);
+
+    setInterval(() => {
+      document.querySelector("#time").innerText = formatter.format(new Date());
+    }, 1000);
+
+    // Set today's date dynamically
+    document.addEventListener("DOMContentLoaded", () => {
+      const today = new Date().toISOString().split("T")[0];
+      const blogLink = document.getElementById("today-blog-link");
+      blogLink.href = `/blog/${today}.html`;
+      blogLink.innerText = `Read today's blog (${today})`;
+    });
+  </script>
+</head>
+<body>
+
+  <div>
+    <h1><i><b>MY DAILY BLOG</b></i></h1>
+    <img src="https://i.imgur.com/zy8BRWw.png" style="width:560px;"><br><br>
+
+    <div id="timezone">
+      <i>
+        Local Time (Oslo): <span id="time">00:00</span>
+      </i>
+    </div>
+
+    <br><br>
+    <a id="today-blog-link" href="#">Loading today’s blog...</a>
+    <br><br>
+
+    <a href="/about.html">about</a> //
+    <a href="/faq.html">faq</a> //
+    <a href="/blog/">blog archive</a> //
+    <a href="/daily/tracker.html">daily tracker</a> //
+    <a href="/loggers/books.html">books</a> //
+    <a href="/loggers/movies.html">movies</a> //
+    <a href="/loggers/series.html">series</a> //
+    <a href="/all-files/">all files</a>
+
+  </div>
+</body>
+</html>
